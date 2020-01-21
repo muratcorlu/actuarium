@@ -1,3 +1,29 @@
+# Actuarium
+
+## Admin
+
+- [ ] Authenticate (admins are whitelisted)
+- [ ] Create (or continue) a game
+- [ ] Dashboard:
+  - [ ] Code that participants can use to join game
+  - [ ] List of participants
+  - [ ] Button to start game (at least 6 participants?) or set current round
+  - [ ] Timer
+  - [ ] Current round's statistics
+  - [ ] Insurer and customer rankings
+
+## Player
+
+- [ ] Enter game code and name to join game
+- [ ] Get assigned an insurer or customer role
+- [ ] Insurer dashboard:
+  - [ ] Current round and rules
+  - [ ] Various input field depending on the current round (e.g. premium, which customers to insure)
+  - [ ] Notepad to make calculations?
+- [ ] Customer dashboard:
+  - [ ] Current round and rules
+  - [ ] Notepad to make calculations?
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
