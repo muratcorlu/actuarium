@@ -2,7 +2,7 @@
 
 ## Admin
 
-- [ ] Authenticate (admins are whitelisted)
+- [ ] Authenticate (admins are whitelisted?)
 - [ ] Create (or continue) a game
 - [ ] Dashboard:
   - [ ] Code that participants can use to join game
@@ -23,6 +23,8 @@
 - [ ] Customer dashboard:
   - [ ] Current round and rules
   - [ ] Notepad to make calculations?
+
+Time spent so far: 3 (hours)
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
