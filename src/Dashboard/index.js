@@ -3,7 +3,7 @@ import Button from 'react-bootstrap/Button'
 import Navbar from 'react-bootstrap/Navbar'
 import { useSelector } from 'react-redux'
 import { isEmpty, isLoaded, useFirebase } from 'react-redux-firebase'
-import Login from './Login'
+import Login from '../Login'
 
 const Dashboard = () => {
   const auth = useSelector(state => state.firebase.auth)

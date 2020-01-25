@@ -2,7 +2,8 @@
 
 ## Admin
 
-- [x] Authenticate (admins are whitelisted?)
+- [x] Authenticate
+- [ ] Only certain (whitelisted) users may create games?
 - [ ] Create (or continue) a game
 - [ ] Dashboard:
   - [ ] Code that participants can use to join game
