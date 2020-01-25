@@ -8,4 +8,7 @@ export const firebaseConfig = {
   appId: '1:760412036587:web:4b89278e5a1ada54450dae'
 }
 
-export const rrfConfig = {}
+export const rrfConfig = {
+  userProfile: 'users',
+  useFirestoreForProfile: true
+}
