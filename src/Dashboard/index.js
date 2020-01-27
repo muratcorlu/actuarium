@@ -2,6 +2,7 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import { isEmpty, isLoaded } from 'react-redux-firebase'
 import Login from '../Login'
+import Admin from './Admin'
 import Container from './Container'
 
 const Dashboard = () => {
@@ -16,7 +17,11 @@ const Dashboard = () => {
     return <Login />
   }
 
-  return <Container></Container>
+  return (
+    <Container>
+      <Admin />
+    </Container>
+  )
 }
 
 export default Dashboard

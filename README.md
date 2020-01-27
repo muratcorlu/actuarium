@@ -4,7 +4,7 @@
 
 - [x] Authenticate
 - [ ] Only certain (whitelisted) users may create games?
-- [ ] Create (or continue) a game
+- [x] Create (or continue) a game
 - [ ] Dashboard:
   - [ ] Code that participants can use to join game
   - [ ] List of participants
@@ -25,7 +25,7 @@
   - [ ] Current round and rules
   - [ ] Notepad to make calculations?
 
-Time spent so far: 5 (hours)
+Time spent so far: 6 (hours)
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
