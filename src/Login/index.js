@@ -1,29 +1,27 @@
-import React, { useState } from 'react'
+import { Formik } from 'formik'
+import React from 'react'
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
 import { useFirebase, useFirestore } from 'react-redux-firebase'
 import LoginButton from './LoginButton'
 
 const Login = () => {
-  const [validated, setValidated] = useState(false)
-  const [name, setName] = useState('')
-  const [code, setCode] = useState('')
-
   const firebase = useFirebase()
   const firestore = useFirestore()
 
-  const register = async event => {
-    // todo: disable login button with spinner
-    event.preventDefault()
-    event.stopPropagation()
-    const isValid = event.currentTarget.checkValidity()
-
-    if (!isValid) {
-      setValidated(true)
-      return
+  const validate = async ({ name, code }) => {
+    const errors = {}
+    if (!name) {
+      errors.name = 'Please enter your name'
     }
+    if (!code) {
+      errors.code = 'Please enter a code'
+    }
+    return errors
+  }
 
-    const result = await firestore.get({
+  const login = async ({ code }, { setFieldError }) => {
+    const { empty } = await firestore.get({
       collection: 'games',
       where: [
         ['status', '==', 'created'],
@@ -31,48 +29,54 @@ const Login = () => {
       ],
       limit: 1
     })
-    if (result.empty) {
-      // todo: make code field invalid and show error
+
+    if (empty) {
+      setFieldError('code', 'This is not a valid code')
       return
     }
 
-    firebase.auth().signInAnonymously()
+    // todo: find a way to sign in with the provided name
+    return firebase.auth().signInAnonymously()
   }
 
   return (
     <div className="login">
-      <Form noValidate validated={validated} onSubmit={register} className="mb-5">
-        <h1 className="mb-4">Actuarium</h1>
-        <p className="text-muted">To join a game, enter your name and a game code.</p>
-        <Form.Group controlId="name">
-          <Form.Label srOnly>Your name</Form.Label>
-          <Form.Control
-            type="text"
-            value={name}
-            onChange={e => setName(e.target.value)}
-            size="lg"
-            placeholder="Your name"
-            autoFocus
-            required
-          />
-        </Form.Group>
-        <Form.Group controlId="code">
-          <Form.Label srOnly>Game code</Form.Label>
-          <Form.Control
-            type="text"
-            value={code}
-            onChange={e => setCode(e.target.value)}
-            size="lg"
-            placeholder="Game code"
-            required
-            minLength="6"
-            maxLength="6"
-          />
-        </Form.Group>
-        <Button type="submit" variant="primary" block size="lg">
-          Start
-        </Button>
-      </Form>
+      <h1 className="mb-4">Actuarium</h1>
+      <p>To join a game, enter your name and a game code.</p>
+      <Formik initialValues={{ name: '', code: '' }} validate={validate} onSubmit={login}>
+        {({ values, errors, touched, handleChange, handleSubmit, isValidating, isSubmitting }) => (
+          <Form noValidate onSubmit={handleSubmit} className="mb-4">
+            <Form.Group controlId="name">
+              <Form.Label srOnly>Your name</Form.Label>
+              <Form.Control
+                type="text"
+                value={values.name}
+                onChange={handleChange}
+                isInvalid={touched.name && errors.name}
+                size="lg"
+                placeholder="Your name"
+                autoFocus
+              />
+              <Form.Control.Feedback type="invalid">{errors.name}</Form.Control.Feedback>
+            </Form.Group>
+            <Form.Group controlId="code">
+              <Form.Label srOnly>Game code</Form.Label>
+              <Form.Control
+                type="text"
+                value={values.code}
+                onChange={handleChange}
+                isInvalid={touched.code && errors.code}
+                size="lg"
+                placeholder="Game code"
+              />
+              <Form.Control.Feedback type="invalid">{errors.code}</Form.Control.Feedback>
+            </Form.Group>
+            <Button type="submit" variant="primary" block size="lg" disabled={isValidating || isSubmitting}>
+              Login
+            </Button>
+          </Form>
+        )}
+      </Formik>
       <LoginButton />
     </div>
   )
