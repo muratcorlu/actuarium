@@ -20,7 +20,7 @@ const Login = () => {
     return errors
   }
 
-  const login = async ({ code }, { setFieldError }) => {
+  const login = async ({ name, code }, { setFieldError }) => {
     const { empty } = await firestore.get({
       collection: 'games',
       where: [
@@ -35,8 +35,8 @@ const Login = () => {
       return
     }
 
-    // todo: find a way to sign in with the provided name
-    return firebase.auth().signInAnonymously()
+    const { user } = await firebase.auth().signInAnonymously()
+    return user.updateProfile({ displayName: name })
   }
 
   return (

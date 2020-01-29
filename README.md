@@ -15,7 +15,7 @@
 
 ## Player
 
-- [ ] Enter game code and name to join game
+- [x] Enter game code and name to join game
 - [ ] Get assigned an insurer or customer role
 - [ ] Insurer dashboard:
   - [ ] Current round and rules
@@ -25,7 +25,7 @@
   - [ ] Current round and rules
   - [ ] Notepad to make calculations?
 
-Time spent so far: 8 (hours)
+Time spent so far: 9 (hours)
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
