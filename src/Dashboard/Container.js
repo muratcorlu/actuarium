@@ -13,6 +13,7 @@ const Container = ({ children }) => {
       <Navbar variant="dark" bg="dark" className="mb-4">
         <Navbar.Brand>Actuarium</Navbar.Brand>
         <Navbar.Text className="ml-auto mr-2">{auth.displayName}</Navbar.Text>
+        {/* todo: remove anonymous users from the users collection? */}
         <Button size="sm" variant="outline-secondary" onClick={firebase.logout}>
           Logout
         </Button>

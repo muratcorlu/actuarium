@@ -20,8 +20,8 @@ const Login = () => {
     return errors
   }
 
-  const login = async ({ name, code }, { setFieldError }) => {
-    const { empty } = await firestore.get({
+  const login = async ({ name: displayName, code }, { setFieldError }) => {
+    const { empty, docs } = await firestore.get({
       collection: 'games',
       where: [
         ['status', '==', 'created'],
@@ -36,7 +36,14 @@ const Login = () => {
     }
 
     const { user } = await firebase.auth().signInAnonymously()
-    return user.updateProfile({ displayName: name })
+    await user.updateProfile({ displayName })
+    // add player to users collection
+    await firestore.set({ collection: 'users', doc: user.uid }, { displayName })
+    // add player id to game
+    return firestore.update(
+      { collection: 'games', doc: docs[0].id },
+      { playerIds: firestore.FieldValue.arrayUnion(user.uid) }
+    )
   }
 
   return (

@@ -26,8 +26,8 @@ const Admin = ({ user: { uid } }) => {
 
   return (
     <Container fluid>
-      <Jumbotron className="text-center">
-        <h1>Current game</h1>
+      <Jumbotron>
+        <h1 className="text-center mb-4">Current game</h1>
         {games.length > 0 ? <GameLobby {...currentGame} /> : <CreateGame click={createGame} />}
       </Jumbotron>
     </Container>
