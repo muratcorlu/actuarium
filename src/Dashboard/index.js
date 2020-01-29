@@ -18,7 +18,7 @@ const Dashboard = () => {
     return <Login />
   }
 
-  return <Container>{user.isAnonymous ? <Player user={user} /> : <Admin />}</Container>
+  return <Container>{user.isAnonymous ? <Player user={user} /> : <Admin user={user} />}</Container>
 }
 
 export default Dashboard
